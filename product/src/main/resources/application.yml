@@ -1,0 +1,50 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/seata_product?serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      username: root
+      password: admin
+  jpa:
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update #没有则建表，create表示每次重建
+    database: mysql
+    show-sql: true
+  resources:
+    chain:
+      strategy:
+        content:
+          enabled: true
+          paths:
+  application:
+    name: seata-product
+  cloud:
+    nacos:
+      discovery:
+        service: ${spring.application.name}
+        server-addr: 127.0.0.1:8848
+        # group: order-service-group
+  main:
+    allow-bean-definition-overriding: true
+
+# Seata 配置项，对应 SeataProperties 类
+seata:
+  application-id: ${spring.application.name} # Seata 应用编号，默认为 ${spring.application.name}
+  tx-service-group: seata-product-group # Seata 事务组编号，用于 TC 集群名，此处的名称一定要与 vgroup-mapping下配置的参数保持一致
+  # Seata 服务配置项，对应 ServiceProperties 类
+  service:
+    # 虚拟组和分组的映射
+    vgroup_mapping:
+      seata-product-group: default
+  # Seata 注册中心配置项，对应 RegistryProperties 类
+  registry:
+    type: nacos # 注册中心类型，默认为 file
+    nacos:
+      cluster: default # 使用的 Seata 分组
+      namespace: # Nacos 命名空间
+      serverAddr: 127.0.0.1:8848 # Nacos 服务地址
+      application: seata-server-chenmf
