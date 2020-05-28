@@ -4,8 +4,8 @@ import com.account.account.po.TAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 
 /**
@@ -19,9 +19,14 @@ public interface TAccountDao extends JpaRepository<TAccount, Long> {
 
     int deleteAllByUserId(Long userId);
 
-    @Transactional
+    @Transactional //使用@query做DML操作时，需要加@Transactional和@Modifying注解，否则会报错
     @Modifying(clearAutomatically = true) //表示增删改
     @Query(value = "update t_account set money = money - ?1 where id = ?2", nativeQuery=true) //nativeQuery=false表示使用HQL
-    int decrease(Double decreaseMoney, Long id);
+    int decrMoney(Double decrMoney, Long id);
+
+    @Transactional //使用@query做DML操作时，需要加@Transactional和@Modifying注解，否则会报错
+    @Modifying(clearAutomatically = true) //表示增删改
+    @Query(value = "update t_account set money = money + ?1 where id = ?2", nativeQuery=true) //nativeQuery=false表示使用HQL
+    int incrMoney(Double incrMoney, Long id);
 
 }

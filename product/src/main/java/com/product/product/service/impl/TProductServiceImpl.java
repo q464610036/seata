@@ -4,6 +4,7 @@ import com.product.product.dao.TProductDao;
 import com.product.product.po.TProduct;
 import com.product.product.service.TProductService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -31,6 +32,7 @@ public class TProductServiceImpl implements TProductService {
     }
 
     @Override
+    @Transactional
     public int decreaseNum(Integer decreaseNum, Long id) {
         return tProductDao.decreaseNum(decreaseNum, id);
     }

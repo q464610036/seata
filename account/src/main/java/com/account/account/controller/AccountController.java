@@ -2,10 +2,12 @@ package com.account.account.controller;
 
 import com.account.account.po.TAccount;
 import com.account.account.service.TAccountService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 @RestController
 @RequestMapping("/account")
@@ -35,7 +37,19 @@ public class AccountController {
      */
     @RequestMapping("/decreaseMoney")
     public String decreaseMoney(Double decreaseMoney, Long id){
-        accountService.decreaseMoney(decreaseMoney, id);
+        accountService.decrMoney(decreaseMoney, id);
+        return "Success";
+    }
+
+    /**
+     * 金额自增
+     * @param incrMoney
+     * @param id
+     * @return
+     */
+    @RequestMapping("/incrMoney")
+    public String incrMoney(Double incrMoney, Long id){
+        accountService.incrMoney(incrMoney, id);
         return "Success";
     }
 }

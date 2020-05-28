@@ -1,6 +1,7 @@
 server:
   port: 8081
 
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/seata_account?serverTimezone=UTC
@@ -13,6 +14,7 @@ spring:
     hibernate:
       ddl-auto: update #没有则建表，create表示每次重建
     database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect  #使用innodb引擎建表，如果不配置默认会按myISAM建表
     show-sql: true
   resources:
     chain:

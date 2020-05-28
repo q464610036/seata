@@ -7,9 +7,9 @@ import com.order.order.po.TOrder;
 import com.order.order.service.TOrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.transaction.Transactional;
 
 
 /**
@@ -28,6 +28,7 @@ public class TOrderServiceImpl implements TOrderService {
     private ProductFeginClient productFeginClient;
 
     @Override
+//    @Transactional
     @GlobalTransactional
     public TOrder save(TOrder po){
         //扣余额

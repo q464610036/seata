@@ -3,10 +3,11 @@ package com.account.account.service.impl;
 import com.account.account.dao.TAccountDao;
 import com.account.account.po.TAccount;
 import com.account.account.service.TAccountService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-
 
 
 /**
@@ -38,8 +39,18 @@ public class TAccountServiceImpl implements TAccountService {
         return accountDao.deleteAllByUserId(userId);
     }
 
+    @Transactional
     @Override
-    public int decreaseMoney(Double decreaseMoney, Long id) {
-        return accountDao.decrease(decreaseMoney, id);
+    public int decrMoney(Double decreaseMoney, Long id) {
+        return accountDao.decrMoney(decreaseMoney, id);
+    }
+
+    @GlobalTransactional
+//    @Transactional
+    @Override
+    public int incrMoney(Double incrMoney, Long id) {
+        int n = accountDao.incrMoney(incrMoney, id);
+//        n = 1/0;
+        return n;
     }
 }

@@ -13,5 +13,7 @@ public interface TAccountService {
 
     public int deleteAllByUserId(Long userId);
 
-    public int decreaseMoney(Double decreaseMoney, Long id);
+    public int decrMoney(Double decrMoney, Long id);
+
+    public int incrMoney(Double incrMoney, Long id);
 }
