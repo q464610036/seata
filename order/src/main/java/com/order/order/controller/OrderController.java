@@ -22,7 +22,7 @@ public class OrderController {
      */
     @RequestMapping("/create")
     public TOrder create(int num){
-        Double unitPrice = 2D;
+        Double unitPrice = 1D;
         String orderName = "奥利奥"+num+"个";
         Long userId = 1L;
 
