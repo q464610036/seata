@@ -52,4 +52,14 @@ public class AccountController {
         accountService.incrMoney(incrMoney, id);
         return "Success";
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/get")
+    public TAccount get(Long id){
+        return accountService.get(id);
+    }
 }

@@ -29,4 +29,7 @@ public interface TAccountDao extends JpaRepository<TAccount, Long> {
     @Query(value = "update t_account set money = money + ?1 where id = ?2", nativeQuery=true) //nativeQuery=false表示使用HQL
     int incrMoney(Double incrMoney, Long id);
 
+    @Query(value = "select * from t_account where id = ?1 for update", nativeQuery=true) //nativeQuery=false表示使用HQL
+//    @Query(value = "select * from t_account where id = ?1", nativeQuery=true) //nativeQuery=false表示使用HQL
+    TAccount get(Long id);
 }

@@ -7,6 +7,7 @@ import com.order.order.po.TOrder;
 import com.order.order.service.TOrderService;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -35,9 +36,8 @@ public class TOrderServiceImpl implements TOrderService {
         String result = accountFeginClient.decreaseMoney(po.getMoney(), accountId);
         System.out.println("扣余额:"+result+" money:"+po.getMoney()+" accountId:"+accountId);
         //扣库存
-        productFeginClient.decreaseNum(po.getNum(), po.getProductId());
+        result = productFeginClient.decreaseNum(po.getNum(), po.getProductId());
         System.out.println("扣库存:"+result+" num:"+po.getNum()+" productId:"+po.getProductId());
-//        int a = 1/0;
         //下单
         TOrder order = tOrderDao.save(po);
         System.out.println("下单:success");

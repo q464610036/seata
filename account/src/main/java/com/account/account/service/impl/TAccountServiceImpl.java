@@ -3,6 +3,7 @@ package com.account.account.service.impl;
 import com.account.account.dao.TAccountDao;
 import com.account.account.po.TAccount;
 import com.account.account.service.TAccountService;
+import io.seata.spring.annotation.GlobalLock;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,11 +47,16 @@ public class TAccountServiceImpl implements TAccountService {
     }
 
     @GlobalTransactional
-//    @Transactional
     @Override
     public int incrMoney(Double incrMoney, Long id) {
         int n = accountDao.incrMoney(incrMoney, id);
-//        n = 1/0;
         return n;
+    }
+
+    @GlobalTransactional
+    @Override
+    public TAccount get(Long id) {
+        TAccount po = accountDao.get(id);
+        return po;
     }
 }

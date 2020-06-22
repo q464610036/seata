@@ -38,7 +38,7 @@ public class ProductController {
      */
     @RequestMapping("/decreaseNum")
     public String decreaseNum(Integer decreaseNum, Long id){
-//        int a = 1/0;
+        int a = 1/0;
         tProductService.decreaseNum(decreaseNum, id);
         return "Success";
     }

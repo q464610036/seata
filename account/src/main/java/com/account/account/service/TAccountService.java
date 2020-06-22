@@ -16,4 +16,6 @@ public interface TAccountService {
     public int decrMoney(Double decrMoney, Long id);
 
     public int incrMoney(Double incrMoney, Long id);
+
+    public TAccount get(Long id);
 }
